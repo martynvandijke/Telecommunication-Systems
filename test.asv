@@ -35,10 +35,9 @@ p_4 = [0;0;0;0;1;1;1];
 Generator = [p_1,p_2,p_3,p_4, d_1,d_2,d_3,d_4,d_5,d_6,d_7];
 Encoder = [ 1, 0, 0 ,0, p_1'; 0,1,0,0 , p_2'; 0,0,1,0, p_3'; 0,0,0,1,p_4'];
 Decoder = [0,0,0,0,d_1';0,0,0,0,d_2';0,0,0,0,d_3';0,0,0,0,d_4';0,0,0,0,d_5';0,0,0,0,d_6';0,0,0,0,d_7';];
-Null = [0;0;0;0];
+Null = [0;0;0;0]
 
 %% do the actual computational work
-disp('Encoding the bistream');
 Encoded = mod( (Generator'*x),2);
 
 %load other faulty encoded bit stream debugging purpose
@@ -47,14 +46,10 @@ load('matlab.mat')
 
 
 %no erros if this contains all zero's
-disp('Caclulting the syndrome matrix');
 Syndrome = mod((Encoder*Encoded),2);
 if Syndrome == Null
-    disp('No Errors recived');
+    disp  ;
 else
-    disp('Errors recived');
-    disp('Going to fix the errors');
-    
+    disp "Errors recived"   ;
 end
-disp('Decoding the bitstream');
 Decode = mod((Decoder*Encoded),2);
