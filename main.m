@@ -2,7 +2,7 @@
 % Student number 0887668
 % Hamming coding(11,7) and coding(20,15) excersie for the Tu/e course Telecommunication Systems
 
-%clear variables;
+clear variables;
 clc; 
 
 %general variables for the generator matrix
@@ -60,8 +60,8 @@ Generator1 = [p_11,p_21,p_31,p_41, p_5, d_11,d_21,d_31,d_41,d_51,d_61,d_71,d_8,d
 Encoder1 = [ 1, 0, 0 ,0, 0 p_11'; 0,1,0,0,0, p_21'; 0,0,1,0,0, p_31'; 0,0,0,1,0,p_41' ; 0,0,0,0,1 p_5' ];
 Decoder1 = [0,0,0,0,0,d_11';0,0,0,0,0,d_21';0,0,0,0,0,d_31';0,0,0,0,0,d_41';0,0,0,0,0,d_51';0,0,0,0,0,d_61';0,0,0,0,0,d_71';0,0,0,0,0,d_8';0,0,0,0,0,d_9';0,0,0,0,0,d_10';0,0,0,0,0,d_11';0,0,0,0,0,d_12';0,0,0,0,0,d_13';0,0,0,0,0,d_14';0,0,0,0,0,d_15'];
 
-NullMatrix = [0;0;0;0];
-NullMatrix1 = [0;0;0;0;0];
+Null = [0;0;0;0];
+Null1 = [0;0;0;0;0];
 
 %% do the actual computational work
 disp('Encoding the bistream');
@@ -70,34 +70,81 @@ Encoded = mod( (Generator'*x),2)
 %load other faulty encoded bit stream debugging purpose
 %load('matlab2.mat')
 
-Encoded2 = [0;0;1;0;1;1;0;1;0;1;1];
+
 
 disp('Caclulting the syndrome matrix');
-Syndrome = mod((Encoder*Encoded2),2)
-if Syndrome ~= NullMatrix;
-    FixedEncoded = Encoded2;
-    disp('Errors recived');
-    ErrorPlace= 4;
-    
-    for j=1:1:4
-        if Syndrome(j) ~= 0;
-            disp('Ben hiero')
-            ErrorPlace =  ErrorPlace + j
-        end
-    end
-    %fix the error
-    disp('Going to fix the bit errors');
-    if FixedEncoded(j) == 1
-        FixedEncoded(j) =0;
-    else
-        FixedEncoded(j) = 1; 
-    end
-    Syndrome = mod((Encoder*FixedEncoded),2);
-end
-disp('Decoding the bitstream');
-%Decode = mod((Decoder*FixedEncoded),2)
 
-%Decode - x
+not_done = true;
+
+% if nnz(Syndrome) ~= 0
+%     while not_done
+%     FixedEncoded = Encoded2;
+%     for j=1:1:4
+%         if Syndrome(j) ~= 0;
+%             ErrorPlace =  ErrorPlace + j
+%         end
+%     end
+%     if ErrorPlace == 9 ||  ErrorPlace == 10 || ErrorPlace == 8 
+%         
+%     else
+%         ErrorPlace = ErrorPlace + 4;
+%     end
+%     disp('Place')
+%     disp(ErrorPlace);
+%     if FixedEncoded((ErrorPlace)) == 1
+%        FixedEncoded(ErrorPlace) = 0
+%      else
+%        FixedEncoded(ErrorPlace) = 1
+%     end
+%     disp('calculating syndrome again')
+%     Syndrome = mod((Encoder*FixedEncoded),2)
+%     %clear ErrorPlace;
+%     ErrorPlace = 0;
+%     disp(ErrorPlace)
+%     if nnz(Syndrome) == 0;
+%         not_done = false;
+%     end
+%     end
+% end
+Encoded2 = [0;0;1;0;1;1;0;      0;1;0;0];
+
+Syndrome = mod((Encoder*Encoded2),2)
+FixedEncoded =  Encoded;   
+
+% if nnz(Syndrome) ~= 0
+%     
+%     disp('Errors revcieved');
+%     ErrorPlace = 0;   
+%     for j=1:1:4
+%         if Syndrome(j) ~= 0;
+%             ErrorPlace =  ErrorPlace + j
+%         end
+%     end
+%     disp('Place')
+%     disp(ErrorPlace);
+%     if FixedEncoded((ErrorPlace)) == 1
+%        FixedEncoded(ErrorPlace) = 0
+%      else
+%        FixedEncoded(ErrorPlace) = 1
+%     end
+% end
+
+n = 7;                % Code length
+k = 4;                % Message length
+
+n1 = 15;
+k2 = 11;
+
+encData = encode(x,n,k)
+
+
+decData = decode(encData,n,k)
+
+
+
+disp('Decoding the bitstream');
+Decode = mod((Decoder*FixedEncoded),2);
+x == decData(1:7)
 
 %% PRBS
 %enb = lteRMCDL('R.0');
