@@ -132,3 +132,15 @@ Decode = mod((Decoder*FixedEncoded),2);
 % 
 % 
 % decData = decode(encData,n,k);
+
+%Error1 = abs(Seq3 - DecodedData1);
+%NumberOfErrors1 = sum(Error1)
+%ErrorRate1 = sum(Error1) / length(Seq3)
+
+%%the to encode bit stream
+x =   [1;1;0;0;1;0;1;1;1;0;0;1;0;1;1;1;0;0;1;0;1];
+
+%% Hamming encoder & decoder
+
+EncodedData = DataEncoder(1,x);
+DecodedData = DataDecoder(1,EncodedData);

@@ -7,39 +7,52 @@
 clear variables;
 clc; 
 
-%%the to encode bit stream
-x =   [1;1;0;0;1;0;1;1;1;0;0;1;0;1;1;1;0;0;1;0;1];
-
-%% Hamming encoder & decoder
-
-EncodedData = DataEncoder(1,x);
-DecodedData = DataDecoder(1,EncodedData);
-
 
 %% PRBS generation
 Seq1 = ltePRBS(1,(2^7 -1 ));
 Seq2 = ltePRBS(1,(2^11 -1 ));
 Seq3 = ltePRBS(1,(10^6 ));
 
-%convert to numbers
+%convert to numbers instead of logical 1's and 0's
 Seq3 = single(Seq3);
 
-snr = 1
+snr = 1;
 
 %add Gaussian noise to the seqence
-Noisy = awgn(Seq3,snr,'measured');
 
-%meassure the amount of errors 
-Error = abs(Seq3 - round(Noisy));
-NumberOfErrors = sum(Error)
+%Noisy = Noise(Seq3);
+%Noisy = Seq3;
+snr = 1:1:20;
+step = floor( length(Seq3)/length(snr))
+for i = 1:step:20*step
+SeqenceArray = Seq3(1:i
+
+end
+% for i = 1:length(Seq3)
+%     if i <= step
+%         SnrInput = 1 ;
+%     else
+%         SnrInput = floor( length(Seq3(1:i)) / length(snr) );
+%     end
+%      Noisy = awgn(Seq3,snr(SnrInput));
+% end
+Decided = Decision(Noisy);
+
+%calculate teh amount of errors for the reference signal
+Error = biterr(Decided',Seq3)
 ErrorRate = sum(Error) / length(Seq3)
 
-%
-EncodedData = DataEncoder(1,Seq3);
-Noisy = awgn(EncodedData,1,'measured');
-DecodedData = DataDecoder(1,EncodedData);
-Error = abs(Seq3 - DecodedData);
-NumberOfErrors = sum(Error)
-ErrorRate = sum(Error) / length(Seq3)
+%encode the seqence of bits
+EncodedData1 = DataEncoder(1,Seq3);
+Noisy1 = awgn(EncodedData1,10,'measured');
+%decide if the noisy bits are 0 or 1's
+Decided1 = Decision(Noisy1);
+%decode the stream of bits
+DecodedData1 = DataDecoder(1,Decided);
+
+%caclulate the amount of errors for the Hamming coded signal
+Error1 = biterr(Decided1',Seq3)
+ErrorRate = sum(Error1) / length(Seq3)
+
 
 
