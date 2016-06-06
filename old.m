@@ -118,3 +118,17 @@ FixedEncoded =  Encoded;
 
 
 Decode = mod((Decoder*FixedEncoded),2);
+
+
+%% encodeing & decoding
+% n = 7;                % Code length
+% k = 4;                % Message length
+% 
+% n1 = 15;
+% k2 = 11;
+% 
+% encData = encode(x,n,k);
+% encData(10) = ~encData(10);
+% 
+% 
+% decData = decode(encData,n,k);

@@ -8,33 +8,39 @@ clear variables;
 clc; 
 
 %%the to encode bit stream
-x =   [1;1;0;0;1;0;1];
+x =   [1;1;0;0;1;0;1;1;1;0;0;1;0;1;1;1;0;0;1;0;1];
+
+%% Hamming encoder & decoder
+
+EncodedData = DataEncoder(1,x);
+DecodedData = DataDecoder(1,EncodedData);
 
 
+%% PRBS generation
+Seq1 = ltePRBS(1,(2^7 -1 ));
+Seq2 = ltePRBS(1,(2^11 -1 ));
+Seq3 = ltePRBS(1,(10^6 ));
+
+%convert to numbers
+Seq3 = single(Seq3);
+
+snr = 1
+
+%add Gaussian noise to the seqence
+Noisy = awgn(Seq3,snr,'measured');
+
+%meassure the amount of errors 
+Error = abs(Seq3 - round(Noisy));
+NumberOfErrors = sum(Error)
+ErrorRate = sum(Error) / length(Seq3)
+
+%
+EncodedData1 = DataEncoder(1,Seq3);
+Noisy1 = awgn(EncodedData1,100,'measured');
+
+DecodedData1 = DataDecoder(1,Noisy1);
+Error1 = abs(Seq3 - DecodedData1);
+NumberOfErrors1 = sum(Error1)
+ErrorRate1 = sum(Error1) / length(Seq3)
 
 
-%% encodeing & decoding
-n = 7;                % Code length
-k = 4;                % Message length
-
-n1 = 15;
-k2 = 11;
-
-encData = encode(x,n,k);
-encData(10) = ~encData(10);
-
-
-decData = decode(encData,n,k);
-
-DataEncoder();
-DataDecoder()
-
-disp('Decoding the bitstream');
-
-
-%% PRBS
-seq1 = ltePRBS(1,(2^7 -1 ));
-seq2 = ltePRBS(1,(2^11 -1 ));
-
-
-numerr = biterr(x,decData(1:7))
