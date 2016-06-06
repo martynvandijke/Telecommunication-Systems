@@ -144,3 +144,28 @@ x =   [1;1;0;0;1;0;1;1;1;0;0;1;0;1;1;1;0;0;1;0;1];
 
 EncodedData = DataEncoder(1,x);
 DecodedData = DataDecoder(1,EncodedData);
+
+
+%Noisy = Noise(Seq3);
+%Noisy = Seq3;
+% snr = 1:1:20;
+% step = floor( length(Seq3)/length(snr))
+% 
+% for i = 1:10^6
+%     if i/step <= 1
+%         SnrInput = 1 ;
+%     else
+%         SnrInput = floor( i/ step    );
+%     end
+%     Noisy(i) = awgn(Seq3(i),snr(SnrInput));
+% end
+
+%Noisy1 = awgn(EncodedData1,10,'measured');
+
+%     for j = 8:8:length(Output)
+%         %disp(j)
+%         %disp(j + 7)
+%     %Output = Var((j):(j+7));
+%     Output(j) = [];
+%     end   
+%     

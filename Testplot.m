@@ -1,0 +1,2 @@
+clc
+load('TestData.mat')

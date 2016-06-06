@@ -24,18 +24,15 @@ snr = 1;
 %Noisy = Seq3;
 snr = 1:1:20;
 step = floor( length(Seq3)/length(snr))
-for i = 1:step:20*step
-SeqenceArray = Seq3(1:i
 
+for i = 1:length(Seq3)
+    if i <= step
+        SnrInput = 1 ;
+    else
+        SnrInput = floor( length(Seq3(1:i)) / length(snr) );
+    end
+    Noisy(i = awgn(Seq3,snr(SnrInput));
 end
-% for i = 1:length(Seq3)
-%     if i <= step
-%         SnrInput = 1 ;
-%     else
-%         SnrInput = floor( length(Seq3(1:i)) / length(snr) );
-%     end
-%      Noisy = awgn(Seq3,snr(SnrInput));
-% end
 Decided = Decision(Noisy);
 
 %calculate teh amount of errors for the reference signal

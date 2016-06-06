@@ -5,13 +5,13 @@ function Output = DataEncoder(start,Data )
 n = 7;                % Code length
 k = 4;                % Message length
 n1 = 15;
-k2 = 11;
+k1 = 11;
 
 
 if start ==1
 Output=     encode(Data,n,k,'hamming/decimal');
 elseif start == 2
-Output =    encode(Data,n1,k1);
+Output =    encode(Data,n1,k1,'hamming/decimal');
 else
     disp('Wrong input');
     
