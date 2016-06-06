@@ -23,6 +23,6 @@ end
 %     Noisy(i) = awgn(InputData(i),snr(SnrInput));
 % 
 % end
-Output = Noisy
+Output = Noisy;
 end
 
