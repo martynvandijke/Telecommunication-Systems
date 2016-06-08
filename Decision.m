@@ -3,7 +3,7 @@ function Output = Decision( InputData )
 %or a logical 'o'
 tresshold = 0.5; %thresshold to be defined 
 
-for i = 1:length(InputData)
+parfor i = 1:length(InputData)
     if InputData(i) <= tresshold
         Output(i) = 0;
     else

@@ -4,7 +4,7 @@ function Output = Noise( InputData )
 snr = -20:1:20; %range of the snr input
 step = floor( length(InputData)/length(snr));
 
-for i = 1:length(InputData);
+parfor i = 1:length(InputData);
     if i/step <= 1
         SnrInput = 1 ;
     else
