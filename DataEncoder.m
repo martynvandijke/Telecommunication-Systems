@@ -1,22 +1,17 @@
 function Output = DataEncoder(start,Data )
-%   Encoder for the data of the hamming n stands for the number of bits to
-%   be coded (7 or 15)
+%   Desicion 
 
-n = 7;                % Code length
-k = 4;                % Message length
-n1 = 15;
-k1 = 11;
-
+n = 7;                % Code length for the 7 bit transmission
+k = 4;                % Message length for the 7bit transmisiion
+n1 = 15;              % Code length for the 15 bit transmission
+k1 = 11;              % Code length for the 15 bit transmission
 
 if start ==1
 Output=     encode(Data,n,k,'hamming/decimal');
 elseif start == 2
 Output =    encode(Data,n1,k1,'hamming/decimal');
 else
-    disp('Wrong input');
-    
+    disp('Wrong input');  
 end
-
-
 end
 
