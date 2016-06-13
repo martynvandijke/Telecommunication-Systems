@@ -2,7 +2,7 @@
 clc
 close all;
 
-%load('FinalData.mat');
+load('FinalData.mat');
 
 % step3 = 3;
 % 
@@ -61,9 +61,12 @@ close all;
 % legend('Without Hamming coder','7 Bit Hammning coder','15 Bit Hammning coder')
 % xlabel('SNR [dB]')
 % ylabel('Bit Error Rate')
+FitArray = [abs(Gain),abs(Gain01),abs(Gain1),abs(Gain11),abs(Gain12),abs(Gain22)];
+
+%fitted = fit(FitArray,snr ,'poly2');
 
 figure('Name','Gain');
-plot(snr,abs(Gain),snr,abs(Gain01),snr,abs(Gain1),snr,abs(Gain11),snr,abs(Gain12),snr,abs(Gain22)           );
+plot(snr,abs(Gain),snr,abs(Gain01),snr,abs(Gain1),snr,abs(Gain11),snr,abs(Gain12),snr,abs(Gain22) ,snr,fitted          );
 hold on;
 grid on;
 h= legend('Seqence 3 7 bit transmission','Seqence 3 15 bit transmission','Seqence 2 7 bit transmission','Seqence 2 15 bit transmission','Seqence 1 7 bit transmission','Seqence 1 15 bit transmission');
