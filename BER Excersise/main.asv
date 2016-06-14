@@ -4,7 +4,7 @@
 % This Matlab script makes use of the Communications Systems Toolbox
 %and the LTE Systems Toolbox adn the Parrel Computing Toolbox
 
-clear all;
+clear var;
 clc; 
 close all;
 
@@ -78,13 +78,8 @@ DecodedData21 = DataDecoder(2,Decided21);
 ErrorRow21 = biterr(DecodedData21',Seq22,'row-wise');
 
 for i = 1:1:41
-    ErrorArray_temp(i) = sum( (ErrorRow((step*i - step+1):(step*i)) ));
-    %ErrorArray_tempTest(i) = cumsum( (ErrorRow(p:(step*p)) ))
-    ErrorArray1_temp(i) = sum( ( ErrorRow1((step*i - step +1):(step*i)) ));
-    ErrorArray2_temp(i) = sum(  (ErrorRow2((step*i - step +1):(step*i)) ));
-    ErrorArray11_temp(i) = sum( (ErrorRow11((step2*i - step2 +1):(step2*i)) ));
-    ErrorArray01_temp(i) = sum( (ErrorRow01((step2*i - step2 +1):(step2*i)) ));
-    ErrorArray21_temp(i) = sum( (ErrorRow21((step2*i - step2 +1):(step2*i)) ));
+   ErrorArray_temp(i) = sum( ErrorRow(p:(step*p) 
+    
 end
 
 % for p = 1:41
@@ -104,22 +99,22 @@ end
 % ErrorArray11 = (step2/ ErrorArray11_temp);
 % ErrorArray21 = (step2 / ErrorArray21_temp);
 
-ErrorArray = (ErrorArray_temp ./ length(Seq33) );
-ErrorArray1 = (ErrorArray1_temp ./ length(Seq33)) ;
-ErrorArray2 = (ErrorArray2_temp ./ length(Seq33));
-
-ErrorArray01 = (ErrorArray01_temp ./ length(Seq22));
-ErrorArray11 = (ErrorArray11_temp ./ length(Seq22));
-ErrorArray21 = (ErrorArray21_temp ./ length(Seq22));
-
-
-% ErrorArray = fliplr((ErrorArray_temp ./ length(Seq33) ));
-% ErrorArray1 = fliplr((ErrorArray1_temp ./ length(Seq33)) );
-% ErrorArray2 = fliplr((ErrorArray2_temp ./ length(Seq33)));
+% ErrorArray = (ErrorArray_temp ./ length(Seq33) );
+% ErrorArray1 = (ErrorArray1_temp ./ length(Seq33)) ;
+% ErrorArray2 = (ErrorArray2_temp ./ length(Seq33));
 % 
-% ErrorArray01 = fliplr((ErrorArray01_temp ./ length(Seq22)));
-% ErrorArray11 = fliplr((ErrorArray11_temp ./ length(Seq22)));
-% ErrorArray21 = fliplr((ErrorArray21_temp ./ length(Seq22)));
+% ErrorArray01 = (ErrorArray01_temp ./ length(Seq22));
+% ErrorArray11 = (ErrorArray11_temp ./ length(Seq22));
+% ErrorArray21 = (ErrorArray21_temp ./ length(Seq22));
+
+
+ErrorArray = fliplr((ErrorArray_temp ./ length(Seq33) ));
+ErrorArray1 = fliplr((ErrorArray1_temp ./ length(Seq33)) );
+ErrorArray2 = fliplr((ErrorArray2_temp ./ length(Seq33)));
+
+ErrorArray01 = fliplr((ErrorArray01_temp ./ length(Seq22)));
+ErrorArray11 = fliplr((ErrorArray11_temp ./ length(Seq22)));
+ErrorArray21 = fliplr((ErrorArray21_temp ./ length(Seq22)));
 
 snr = -20:20;
 
