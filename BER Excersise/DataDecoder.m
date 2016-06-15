@@ -6,7 +6,7 @@ n = 7;                % Code length for the 7 bit transmission
 k = 4;                % Message length for the 7bit transmisiion
 n1 = 15;              % Code length for the 15 bit transmission
 k1 = 11;              % Code length for the 15 bit transmission
-
+Var3 = 0;
 %EncodedData = bi2de(EncodedData);
 
 if start ==1
@@ -19,12 +19,16 @@ end
 
 %Var(1:7:end) = NaN;
 
-% for i = 1:n:length(Var)
+% for i = (n+1):(n+1):length(Var)
 %     disp(i);
-%     disp(Var);
-%     disp(n);
-%     disp(length(Var));
-%    Var = Var( (n*i - n+1):(n*i));
+%     if length(Var) == i
+%         
+%     else
+%     disp(Var(i));
+%     %disp(length(Var));
+%    Var2= Var( i: i+n   );
+%    Var3= [Var3;Var2];
+%     end
 % end
 
 Output = Var;
