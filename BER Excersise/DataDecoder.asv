@@ -7,10 +7,10 @@ k = 4;                % Message length for the 7bit transmisiion
 n1 = 15;              % Code length for the 15 bit transmission
 k1 = 11;              % Code length for the 15 bit transmission
 
-%EncodedData = bi2de(EncodedData);
+EncodedData = bito
 
 if start ==1
-   Var = decode(EncodedData,n,k,'hamming');
+   Var = decode(EncodedData,n,k,'hamming/decimal');
 elseif start == 2
    Var = decode(EncodedData,n1,k1,'hamming');
 else
