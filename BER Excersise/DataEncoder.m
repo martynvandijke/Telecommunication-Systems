@@ -6,6 +6,7 @@ k = 4;                % Message length for the 7bit transmisiion
 n1 = 15;              % Code length for the 15 bit transmission
 k1 = 11;              % Code length for the 15 bit transmission
 
+Data= single(Data);
 if start ==1
 Var =     encode(Data,n,k,'hamming');
 elseif start == 2
@@ -14,6 +15,6 @@ else
     disp('Wrong input');  
 end
 
-Output = Var; %de2bi(Var);
+Output = single(Var); %de2bi(Var);
 end
 

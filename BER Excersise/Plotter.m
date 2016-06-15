@@ -2,7 +2,7 @@
 clc
 close all;
 
-load('FinalData.mat');
+load('FinalDataV2.mat');
 
 % step3 = 3;
 % 
@@ -31,42 +31,14 @@ load('FinalData.mat');
 % ErrorArray22 = fliplr((ErrorArray22/ length(Seq1)));
 % 
 % snr = -20:20;
-% %% Seq 3
-% figure
-% %subplot(2,1,1)
-% semilogy(snr,ErrorArray,'-.',snr,ErrorArray1,'--',snr,ErrorArray2);
-% hold on;
-% grid on;
-% legend('Without Hamming coder','7 Bit Hammning coder','15 Bit Hammning coder')
-% xlabel('SNR [dB]')
-% ylabel('Bit Error Rate')
-% 
-% 
-% %% Seq2
-% %subplot(2,1,2)
-% figure
-% semilogy(snr,ErrorArray01,'-.',snr,ErrorArray11,'--',snr,ErrorArray21);
-% hold on;
-% grid on;
-% legend('Without Hamming coder','7 Bit Hammning coder','15 Bit Hammning coder')
-% xlabel('SNR [dB]')
-% ylabel('Bit Error Rate')
-% 
-% %% Seq1
-% %subplot(2,1,2)
-% figure
-% semilogy(snr,ErrorArray02,'-.',snr,ErrorArray12,'--',snr,ErrorArray22);
-% hold on;
-% grid on;
-% legend('Without Hamming coder','7 Bit Hammning coder','15 Bit Hammning coder')
-% xlabel('SNR [dB]')
-% ylabel('Bit Error Rate')
+
+
 FitArray = [abs(Gain),abs(Gain01),abs(Gain1),abs(Gain11),abs(Gain12),abs(Gain22)];
 
 %fitted = fit(FitArray,snr ,'poly2');
 
 figure('Name','Gain');
-plot(snr,abs(Gain),snr,abs(Gain01),snr,abs(Gain1),snr,abs(Gain11),snr,abs(Gain12),snr,abs(Gain22) ,snr,fitted          );
+plot(snr,Gain,snr,Gain01,snr,Gain1,snr,Gain1,snr,Gain12,snr,Gain22       );
 hold on;
 grid on;
 h= legend('Seqence 3 7 bit transmission','Seqence 3 15 bit transmission','Seqence 2 7 bit transmission','Seqence 2 15 bit transmission','Seqence 1 7 bit transmission','Seqence 1 15 bit transmission');

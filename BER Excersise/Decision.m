@@ -10,5 +10,6 @@ parfor i = 1:length(InputData)
         Output(i) = 1;
     end    
 end
+Output = single(Output);
 end
 
