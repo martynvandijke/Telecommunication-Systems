@@ -16,8 +16,6 @@ else
     disp('Wrong input');
 end
 
-
-
 Output = single(Var);
 end
 

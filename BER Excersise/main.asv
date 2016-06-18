@@ -97,7 +97,7 @@ ErrorArray21 = (ErrorArray21_temp ./ length(Seq22));
 
 %% Plots
 %% Seq 3
-figure('Name','Seq3');
+figure('Name','Seq1 PRBS length ');
 semilogy(snr,ErrorArray,':',snr,ErrorArray1,'.-',snr,ErrorArray2);
 hold on;
 grid on;

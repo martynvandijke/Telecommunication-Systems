@@ -4,44 +4,59 @@ close all;
 
 load('FinalDataV2.mat');
 
-% step3 = 3;
+
 % 
-% parfor p = 1:41
-% ErrorArray1(p) = sum(ErrorRow1(p:(step*p)));
-% ErrorArray(p) = sum(ErrorRow(p:(step*p)));
-% ErrorArray2(p) = sum(ErrorRow2(p:(step*p)));
-% ErrorArray11(p) = sum(ErrorRow11(p:(step2*p)));
-% ErrorArray01(p) = sum(ErrorRow01(p:(step2*p)));
-% ErrorArray21(p) = sum(ErrorRow21(p:(step2*p)));
-% ErrorArray12(p) = sum(ErrorRow12(p:(step3*p)));
-% ErrorArray02(p) = sum(ErrorRow02(p:(step3*p)));
-% ErrorArray22(p) = sum(ErrorRow22(p:(step3*p)));
+% FitArray = [ErrorArray;ErrorArray01;ErrorArray02];
+% 
+% fitted = fit([ErrorArray',ErrorArray01'],snr','poly22');
+% for i = 1:41
+%     for o = 1:41
+%     if ErrorArray(i) == ErrorArray01(o)
+%        gainV2 =  o-p;
+%     end
+%     end
 % end
+% %pdist(ErrorArray,'hamming');
 % 
-% ErrorArray = fliplr((ErrorArray / length(Seq3) ));
-% ErrorArray1 = fliplr((ErrorArray1 / length(Seq3)) );
-% ErrorArray2 = fliplr((ErrorArray2 / length(Seq3)));
-% 
-% ErrorArray01 = fliplr((ErrorArray01/ length(Seq2)));
-% ErrorArray11 = fliplr((ErrorArray11/ length(Seq2)));
-% ErrorArray21 = fliplr((ErrorArray21/ length(Seq2)));
-% 
-% ErrorArray02 = fliplr((ErrorArray02/ length(Seq1)));
-% ErrorArray12 = fliplr((ErrorArray12/ length(Seq1)));
-% ErrorArray22 = fliplr((ErrorArray22/ length(Seq1)));
-% 
-% snr = -20:20;
+% test = setdiff(ErrorArray,ErrorArray01)
 
 
-FitArray = [abs(Gain),abs(Gain01),abs(Gain1),abs(Gain11),abs(Gain12),abs(Gain22)];
 
-%fitted = fit(FitArray,snr ,'poly2');
 
-figure('Name','Gain');
-plot(snr,Gain,snr,Gain01,snr,Gain1,snr,Gain1,snr,Gain12,snr,Gain22       );
+figure('Name','Seq2');
+plot(ErrorArray01,snr);;
 hold on;
 grid on;
-h= legend('Seqence 3 7 bit transmission','Seqence 3 15 bit transmission','Seqence 2 7 bit transmission','Seqence 2 15 bit transmission','Seqence 1 7 bit transmission','Seqence 1 15 bit transmission');
+h= legend('Reference','7 Bit Hammning coder','15 Bit Hammning coder');
 set(h,'Interpreter','latex');
 xlabel('SNR [dB]','Interpreter','latex')
-ylabel('Coding Gain','Interpreter','latex')
+ylabel('Bit Error Rate','Interpreter','latex')
+
+
+% testV2 = ErrorArray1 - ErrorArray;
+% grad = gradient(ErrorArray);
+% gain = testV2 .* grad*10^3;
+% fitted = fit(snr',gain','poly2');
+% 
+% 
+% diff2 = ErrorArray2 - ErrorArray;
+% grad2 = gradient(ErrorArray);
+% gain2 = diff2 .* grad2*10^3;
+% fitted2 = fit(snr',gain2','poly2');
+% 
+% figure();
+% plot(snr,gain);
+% figure();
+% grid on;
+% %hold on;
+% plot(fitted,'fit');
+%plot(fitted2,'fit');
+%hold off;
+% figure('Name','Gain');
+% plot(snr,Gain,snr,Gain01,snr,Gain1,snr,Gain1,snr,Gain12,snr,Gain22       );
+% hold on;
+% grid on;
+% h= legend('Seqence 3 7 bit transmission','Seqence 3 15 bit transmission','Seqence 2 7 bit transmission','Seqence 2 15 bit transmission','Seqence 1 7 bit transmission','Seqence 1 15 bit transmission');
+% set(h,'Interpreter','latex');
+% xlabel('SNR [dB]','Interpreter','latex')
+% ylabel('Coding Gain','Interpreter','latex')
